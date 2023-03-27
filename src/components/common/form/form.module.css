@@ -1,7 +1,8 @@
 .container {
   backdrop-filter: blur(10px);
   border-radius: 10px;
-  background-color: #ddd;
+  background-color: #c0c0c0;
+  border: 2px solid #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin: 20px auto;
@@ -13,15 +14,22 @@
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
+  color: #fff;
 }
 
 .container input {
-  border: 1px solid black;
+  border: 2px solid white;
   background-color: rgba(255, 255, 255, 0.3);
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 15px;
+  color: #fff;
   width: 100%;
+  transition: 0.5s;
+}
+
+.container input:focus {
+  border: 2px solid black;
 }
 
 .nameWrapper {

@@ -14,12 +14,31 @@
 }
 
 .container input {
-  border: 1px solid black;
+  border: 2px solid #ddd;
   background-color: rgba(255, 255, 255, 0.3);
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 15px;
   width: 80%;
+  transition: 0.5s;
+}
+
+.container input:focus {
+  border: 2px solid #000;
+}
+
+.container textarea {
+  border: 2px solid #ddd;
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  width: 80%;
+  transition: 0.5s;
+}
+
+.container textarea:focus {
+  border: 2px solid #000;
 }
 
 .buttonWrapper {
@@ -43,6 +62,10 @@
   }
 
   .container input {
+    width: 90%;
+  }
+
+  .container textarea {
     width: 90%;
   }
 

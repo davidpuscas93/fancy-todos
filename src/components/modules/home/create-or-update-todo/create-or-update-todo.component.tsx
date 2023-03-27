@@ -104,8 +104,7 @@ const CreateOrUpdateToDo = (props: CreateOrUpdateToDoProps) => {
           onChange={(e) => setTitle(e.target.value)}
         />
         <label htmlFor='description'>Description</label>
-        <input
-          type='text'
+        <textarea
           name='description'
           id='description'
           value={description}

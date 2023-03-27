@@ -54,7 +54,6 @@ export const todoSlice = createSlice({
       state.todos = action.payload;
     });
     builder.addCase(updateTodoItem.fulfilled, (state, action) => {
-      console.log(action.meta.arg.docId);
       state.todos = state.todos.map((todo) => {
         if (todo.docId === action.meta.arg.docId) {
           return action.meta.arg.todo;

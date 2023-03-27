@@ -26,6 +26,7 @@ import styles from '@/styles/Home.module.css';
 export default function Home() {
   const [heroImage, setHeroImage] = useState<string | null>(null);
   const [isPanelVisible, setIsPanelVisible] = useState(false);
+  const [orientation, setOrientation] = useState<Orientation>('landscape');
 
   const todos: Array<ToDo> = useAppSelector((state) => state.todos.todos);
   const dispatch = useAppDispatch();
@@ -37,12 +38,6 @@ export default function Home() {
   useEffect(() => {
     const fetchRandomPhoto = async () => {
       try {
-        let orientation: Orientation = 'landscape';
-
-        if (window.innerWidth < window.innerHeight) {
-          orientation = 'portrait';
-        }
-
         const photo = await getRandomPhoto(orientation);
         if (photo && photo.length && photo[0].urls && photo[0].urls.full) {
           setHeroImage(photo[0].urls.full);
@@ -66,9 +61,23 @@ export default function Home() {
       if (typeof unsubscribe === 'function') {
         unsubscribe();
       }
-      window.removeEventListener('resize', fetchRandomPhoto);
     };
-  }, [dispatch]);
+  }, [dispatch, orientation]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < window.innerHeight) {
+        setOrientation('portrait');
+      } else {
+        setOrientation('landscape');
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -84,7 +93,13 @@ export default function Home() {
 
       <main className={styles.root}>
         <Navbar />
-        {heroImage && <Hero imageUrl={heroImage} altText='hero-image' />}
+        {heroImage && (
+          <Hero
+            imageUrl={heroImage}
+            altText='hero-image'
+            orientation={orientation}
+          />
+        )}
         <div className={styles.buttonWrapper}>
           <div className={styles.button}>
             <Button onClick={handleDisplayPanel}>

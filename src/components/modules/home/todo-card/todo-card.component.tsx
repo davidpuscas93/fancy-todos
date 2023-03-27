@@ -15,10 +15,10 @@ const ToDoCard = ({ todo, onPanelOpen }: ToDoCardProps) => {
 
   const handlePanelOpen = () => {
     onPanelOpen(todo);
-  }
+  };
 
   return (
-    <div className={cls(styles.card, 'glass')} onClick={handlePanelOpen}>
+    <div className={cls(styles.card)} onClick={handlePanelOpen}>
       <h5 className={styles.title}>{title}</h5>
       <p className={styles.description}>{description}</p>
     </div>

@@ -12,6 +12,14 @@ body {
   overflow-x: hidden;
 }
 
+input:focus {
+  outline: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+
 .glass {
   background: hsla(0, 0%, 100%, 0.4);
   -webkit-backdrop-filter: blur(10px);
