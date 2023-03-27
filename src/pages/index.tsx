@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { Orientation } from 'unsplash-js';
 
@@ -35,25 +35,41 @@ export default function Home() {
     setIsPanelVisible(true);
   };
 
-  useEffect(() => {
-    const fetchRandomPhoto = async () => {
-      try {
-        const photo = await getRandomPhoto(orientation);
-        if (photo && photo.length && photo[0].urls && photo[0].urls.full) {
-          setHeroImage(photo[0].urls.full);
-        }
-      } catch (error) {
-        console.log(error);
+  const fetchRandomPhoto = useCallback(async (orientation: Orientation) => {
+    try {
+      const photo = await getRandomPhoto(orientation);
+      if (photo && photo.length && photo[0].urls && photo[0].urls.full) {
+        setHeroImage(photo[0].urls.full);
+        setOrientation(orientation);
       }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      let orientation: Orientation = 'landscape';
+      if (window.innerWidth < window.innerHeight) {
+        orientation = 'portrait';
+      } else {
+        orientation = 'landscape';
+      }
+      fetchRandomPhoto(orientation);
     };
 
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [fetchRandomPhoto]);
+
+  useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (!user) {
         Router.push('/login');
       } else {
         dispatch(getTodoList(user.uid));
-        window.addEventListener('resize', fetchRandomPhoto);
-        fetchRandomPhoto();
       }
     });
 
@@ -63,21 +79,6 @@ export default function Home() {
       }
     };
   }, [dispatch, orientation]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < window.innerHeight) {
-        setOrientation('portrait');
-      } else {
-        setOrientation('landscape');
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   return (
     <>
@@ -93,13 +94,11 @@ export default function Home() {
 
       <main className={styles.root}>
         <Navbar />
-        {heroImage && (
-          <Hero
-            imageUrl={heroImage}
-            altText='hero-image'
-            orientation={orientation}
-          />
-        )}
+        <Hero
+          imageUrl={heroImage}
+          altText='hero-image'
+          orientation={orientation}
+        />
         <div className={styles.buttonWrapper}>
           <div className={styles.button}>
             <Button onClick={handleDisplayPanel}>

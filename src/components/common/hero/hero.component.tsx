@@ -5,7 +5,7 @@ import { useParallax } from 'react-scroll-parallax';
 import { Orientation } from 'unsplash-js';
 
 type HeroProps = {
-  imageUrl: string;
+  imageUrl: string | null;
   altText: string;
   orientation?: Orientation;
 };
