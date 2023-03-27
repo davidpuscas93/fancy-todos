@@ -13,9 +13,10 @@
 
 .card:hover {
   transform: translate3d(0, -4px, 0);
+  scale: 1.1;
   border-radius: 6px;
   border: 2px solid #fff;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .title {
