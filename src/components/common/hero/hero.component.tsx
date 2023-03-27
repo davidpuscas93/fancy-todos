@@ -31,8 +31,6 @@ const Hero = ({ imageUrl, altText, orientation }: HeroProps) => {
     }
   }, [orientation]);
 
-  console.log(backupImage, orientation);
-
   return (
     <>
       <div className={styles.hero} onClick={handleScrollDown}>
