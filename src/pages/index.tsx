@@ -35,25 +35,26 @@ export default function Home() {
     setIsPanelVisible(true);
   };
 
-  const fetchRandomPhoto = useCallback(async (orientation: Orientation) => {
-    try {
-      const photo = await getRandomPhoto(orientation);
-      if (photo && photo.length && photo[0].urls && photo[0].urls.full) {
-        setHeroImage(photo[0].urls.full);
-        setOrientation(orientation);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
   useEffect(() => {
+    const fetchRandomPhoto = async (orientation: Orientation) => {
+      try {
+        const photo = await getRandomPhoto(orientation);
+        if (photo && photo.length && photo[0].urls && photo[0].urls.full) {
+          setHeroImage(photo[0].urls.full);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     const handleResize = () => {
       let orientation: Orientation = 'landscape';
       if (window.innerWidth < window.innerHeight) {
         orientation = 'portrait';
+        setOrientation(orientation);
       } else {
         orientation = 'landscape';
+        setOrientation(orientation);
       }
       fetchRandomPhoto(orientation);
     };
@@ -62,7 +63,7 @@ export default function Home() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [fetchRandomPhoto]);
+  }, []);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
