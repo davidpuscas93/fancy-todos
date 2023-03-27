@@ -1,0 +1,33 @@
+.sidePanel {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  opacity: 0.9;
+}
+
+.sidePanel__gradient {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.sidePanel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+  padding: 20px 0;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 40px;
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid #ddd;
+}
+
+
+
+.sidePanel__content {
+  width: 100%;
+  padding: 20px 0;
+  margin: 20px;
+  position: relative;
+}

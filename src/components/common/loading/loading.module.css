@@ -1,0 +1,86 @@
+/**
+ * ==============================================
+ * Dot Collision
+ * ==============================================
+ */
+.collision {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+}
+.collision::before,
+.collision::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+.collision::before {
+  left: -10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  animation: dot-collision-before 2s infinite ease-in;
+}
+.collision::after {
+  left: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  animation: dot-collision-after 2s infinite ease-in;
+  animation-delay: 1s;
+}
+
+.white {
+  background-color: white;
+  color: white;
+}
+
+.white::before {
+  background-color: white;
+  color: white;
+}
+
+.white::after {
+  background-color: white;
+  color: white;
+}
+
+.black {
+  background-color: black;
+  color: black;
+}
+
+.black::before {
+  background-color: black;
+  color: black;
+}
+
+.black::after {
+  background-color: black;
+  color: black;
+}
+
+@keyframes dot-collision-before {
+  0%,
+  50%,
+  75%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-15px);
+  }
+}
+@keyframes dot-collision-after {
+  0%,
+  50%,
+  75%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(15px);
+  }
+}

@@ -1,0 +1,36 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  height: 40px;
+  width: 100%;
+}
+
+.default {
+  background-color: #000;
+}
+
+.delete {
+  background-color: red;
+}
+
+.default:hover {
+  background-color: #222;
+  transition: 0.3s;
+}
+
+.delete:hover {
+  background-color: #b92b27;
+  transition: 0.3s;
+}
+
+.default:disabled {
+  background-color: #222;
+  transition: 0.3s;
+}
