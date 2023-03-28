@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Orientation } from 'unsplash-js';
 
@@ -55,9 +55,11 @@ export default function Home() {
       } else {
         orientation = 'landscape';
         setOrientation(orientation);
+        fetchRandomPhoto(orientation);
       }
-      fetchRandomPhoto(orientation);
     };
+
+    handleResize();
 
     window.addEventListener('resize', handleResize);
     return () => {

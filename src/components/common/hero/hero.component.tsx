@@ -12,9 +12,7 @@ type HeroProps = {
 
 const Hero = ({ imageUrl, altText, orientation }: HeroProps) => {
   const { ref } = useParallax<HTMLDivElement>({ speed: -50 });
-  const [backupImage, setBackupImage] = useState(
-    '/assets/agenda-landscape.jpg'
-  );
+  const [backupImage, setBackupImage] = useState('/assets/agenda-portrait.jpg');
 
   const handleScrollDown = () => {
     window.scrollTo({
@@ -37,7 +35,9 @@ const Hero = ({ imageUrl, altText, orientation }: HeroProps) => {
         <div ref={ref}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={imageUrl ? imageUrl : backupImage}
+            src={
+              imageUrl && orientation === 'landscape' ? imageUrl : backupImage
+            }
             alt={altText}
             className={styles.image}
           />
