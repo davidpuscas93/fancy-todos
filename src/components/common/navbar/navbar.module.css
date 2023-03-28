@@ -75,6 +75,9 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .navbar {
+    opacity: 1;
+  }
   .avatar {
     margin-top: 0.5rem;
   }
